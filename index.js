@@ -109,4 +109,5 @@ app.get("/public/files/:root", (req, res) => {
   res.sendFile(__dirname + `/public/files/${root}`);
 });
 
-app.listen(1030, () => console.log("app is running 1030"));
+const PORT = 3000;
+app.listen(PORT, () => console.log(`Port: ${PORT}`));

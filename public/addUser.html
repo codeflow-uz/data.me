@@ -40,12 +40,12 @@
       </button>
       <div class="collapse navbar-collapse" id="collapsibleNavId">
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-          <li class="nav-item active">
+          <li class="nav-item">
             <a class="nav-link" href=""
               ><i class="fas fa-home"></i> Bosh sahifa</a
             >
           </li>
-          <li class="nav-item dropdown">
+          <li class="nav-item dropdown active">
             <a
               class="nav-link dropdown-toggle"
               href="#"
@@ -88,25 +88,33 @@
       </div>
     </nav>
 
-    <div class="container" style="text-align: center; margin-top: 7%">
-      <form action="/search" method="post" style="">
-        <img src="logo.svg" alt="" class="p-5" width="300" /> <br />
-        <input
-          type="search"
-          name="searchInput"
-          id=""
-          class="myInput makeWhite"
-          placeholder="Qidiruv..."
-        />
-        <select class="myInput makeWhite" id="searchType" required>
-          <option value="none" disabled selected>Tanlang</option>
-          <option value="individual">Shaxs</option>
-          <option value="company">Kompaniya</option>
-        </select>
-        <button type="submit" class="myInput makeWhite">
-          <i class="fas fa-search mainColor"></i>
-          Search
-        </button>
+    <div class="container" style="margin-top: 7%">
+      <form action="/search" method="post" class="makeWhite" style="padding: 25px; border-radius: 15px;">
+        <form>
+          <h2 style="text-align: center;">Shaxsni ro'yxatdan o'tkazish</h2>
+          <div class="form-group">
+            <label for="name">To'liq ism: </label>
+            <input type="email" class="form-control" id="name" aria-describedby="nameHelp" placeholder="FISh">
+            <small id="nameHelp" class="form-text text-muted">Familiya ismingiz va sharifingizni kiritng</small>
+          </div>
+          <div class="form-group">
+            <label for="date">Tug'ilgan sana: </label>
+            <input type="date" class="form-control" id="date" placeholder="Tug'ilgan sanangiz">
+          </div>
+          <div class="form-group">
+            <label for="passport">Passport seriyasi</label>
+            <input type="text" class="form-control passport-num" id="passport"  placeholder="XX-XXXXXXX">
+          </div>
+          <div class="form-group">
+            <label for="nationality">Fuqaroligi</label>
+            <input type="text" class="form-control passport-num" id="nationality"  placeholder="Fuqaroligi">
+          </div>
+          <div class="form-group">
+            <label for="files">Briktirilgan fayllar</label>
+            <input type="file" class="form-control-file passport-num" id="files"  placeholder="Fayllarni yuklang">
+          </div>
+          <button type="submit" class="btn btn-primary">Ro'yxatga olish</button>
+        </form>
       </form>
     </div>
 
@@ -127,5 +135,13 @@
       integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
       crossorigin="anonymous"
     ></script>
+    <script src="https://cdn.jsdelivr.net/npm/cleave.js@1.6.0/dist/cleave.min.js"></script>
+    <script>
+      var cleave = new Cleave('.passport-num', {
+        blocks: [2,7],
+        delimiter: '-',
+        uppercase: true
+    });
+    </script>
   </body>
 </html>
