@@ -1,0 +1,43 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+* {
+  font-family: "Poppins", sans-serif;
+}
+body {
+  background: #f4f4f4;
+}
+.dropdown-item:hover {
+  background-color: rgba(35, 123, 255, 0.95) !important;
+  color: aliceblue;
+}
+.makeWhite {
+  background: #ffffff;
+  box-shadow: 4px 4px 24px rgba(85, 184, 255, 0.08);
+}
+.myInput {
+  outline: none;
+  border: none;
+  padding: 5px 24px;
+  border-radius: 5px;
+}
+.mainColor {
+  color: #237bff;
+}
+.actionBtn {
+  transition: 0.5s all;
+  background: #ffffff;
+  border: none;
+  width: 36px;
+  height: 36px;
+  text-align: center;
+  border-radius: 100%;
+  color: #237bff;
+  padding: 5px;
+  box-shadow: 4px 4px 24px rgba(85, 184, 255, 0.25);
+  outline: none !important;
+}
+
+.actionBtn:hover {
+  transition: 0.3s all;
+  background: #237bff;
+  color: #f4f4f4;
+}

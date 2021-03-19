@@ -1,0 +1,52 @@
+[
+    {
+        "id": 1,
+        "name": "Zokir",
+        "files": [
+            {
+                "file_name": "pdf-1615832756313.pdf",
+                "uploaded": "15 21 2021",
+                "src": "public/files/pdf-1615832756313.pdf"
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "name": "Aziz",
+        "files": []
+    },
+    {
+        "id": "user_id396683.5139129572",
+        "name": "Ali",
+        "files": []
+    },
+    {
+        "id": "user_id531533.2406559439",
+        "name": "Usmon",
+        "files": []
+    },
+    {
+        "id": "user_id27550.698846539268",
+        "files": []
+    },
+    {
+        "id": "user_id431434.61769398564",
+        "files": []
+    },
+    {
+        "id": "user_id688303.4696205013",
+        "files": []
+    },
+    {
+        "id": "user_id57900.36153308131",
+        "files": []
+    },
+    {
+        "id": "user_id358930.463999247",
+        "files": []
+    },
+    {
+        "id": "user_id542189.9102454933",
+        "files": []
+    }
+]

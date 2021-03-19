@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/main.css">
+    <title>Database</title>
+</head>
+
+<body>
+
+    <div class="header">
+        <nav>
+            <ul>
+                <li style="width: 10%;">
+                    <a href="/adduser">
+                        <img class="btn" src="add_user.png" alt="">
+                    </a>
+                </li>
+                <li style="width: 40%;">
+                    <a href="/">
+                        <img class="btn" src="logo.jpg" alt="">
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="main">
+        <h1>Kompaniya kiritsh</h1>
+        <form method="POST" enctype="multipart/form-data">
+            <div class="flex">
+                <div class="labels">
+                    <label for="fish">
+                        Kompaniya nomi: 
+                    </label>
+                    <label for="birthday">
+                        Qayd etilgan sana:
+                    </label>
+                    <label for="passport">
+                    Kompaniya to'grisida:
+                    </label>
+                    <label for="fuqaroligi">
+                       Qaysi davlatga tegishli:
+                    </label>
+                    <label for="fayllar">
+                        Biriktirilgan fayllar:
+                    </label>
+                </div>
+                <div class="inputs">
+                    <input type="text" id="fish">
+                    <input type="date" id="birthday">
+                    <input type="text" id="passport">
+                    <input type="text" id="fuqaroligi">
+                    <input type='file' name='files[]' multiple />
+                </div>
+            </div>
+            <button type="submit">OK</button>
+        </form>
+    </div>
+
+
+</body>
+
+</html>
