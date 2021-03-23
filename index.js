@@ -3,111 +3,68 @@ const ejs = require("ejs");
 const fs = require("fs");
 const multer = require("multer");
 const path = require("path");
+const {
+    query
+} = require('./public/pool.js')
 var bodyparser = require("body-parser");
 const app = express();
-
+const json2xls = require('json-to-excel');
+const export2xls = require("./export.js");
+const PORT = 3000;
 let data = fs.readFileSync("data.json");
 let dbase = JSON.parse(data);
 const storage = multer.diskStorage({
-  destination: "./public/files",
-  filename: function (req, file, cb) {
-    cb(
-      null,
-      file.fieldname + "-" + Date.now() + path.extname(file.originalname)
-    );
-  },
+    destination: "./public/files",
+    filename: function (req, file, cb) {
+        cb(
+            null,
+            file.fieldname + "-" + Date.now() + path.extname(file.originalname)
+        );
+    },
 });
 const upload = multer({
-  storage: storage,
+    storage: storage,
 }).single("pdf");
 
 app.set("view engine", "html");
 app.engine("html", ejs.renderFile);
 app.use(express.static("public"));
-app.use(bodyparser.json());
-
-app.use(
-  bodyparser.urlencoded({
+app.use(express.json());
+app.use(bodyparser.urlencoded({
     extended: false,
-  })
-);
-
-var visited = 0;
-var x = false;
+}));
 
 app.get("/", (req, res) => {
-  if (!visited) {
-    res.render("index", {
-      data: dbase,
-      user: false,
-    });
-  } else {
-    res.render("index", {
-      data: dbase,
-      user: x,
-    });
-  }
+    res.render('index')
 });
 
-app.get("/userfind/:id", (req, res) => {
-  let id = req.url.split("/")[2];
-  x = dbase.find((e) => e.id == id);
-  visited++;
-  res.redirect("/");
-});
-
-app.get("/adduser/", (req, res) => {
-  res.render("user");
-});
-
-app.post("/adduser/", (req, res) => {
-  dbase.push({
-    id: "user_id" + Math.random() * 1000000,
-    name: req.body.usname,
-    files: [],
-  });
-  let data = JSON.stringify(dbase, null, 4);
-  fs.writeFileSync("data.json", data);
-  x = false;
-  res.redirect("/");
-});
-
-app.get("/addcomp/", (req, res) => {
-  res.render("company", {
-    data: dbase,
-  });
-});
-
-app.post("/addcomp/", (req, res) => {
-  upload(req, res, async (err) => {
-    if (err instanceof multer.MulterError) {
-      console.log("Multer", err);
-    } else if (err) {
-      console.log(err);
+app.post('/search', async(req, res) => {
+    if (req.body.from == 'shaxs') {
+        res.render('user')
+    } else  if(req.body.from == 'company'){
+        res.render('company') 
+    }else {
+        res.send('Error retry.')
     }
-    let user = dbase.find((e) => e.id == req.body.user);
-    user.files.push({
-      file_name: req.file.filename,
-      uploaded:
-        new Date().getDate() +
-        " " +
-        new Date().getMonth() +
-        1 +
-        " " +
-        new Date().getFullYear(),
-      src: req.file.path,
-    });
-    let data = JSON.stringify(dbase, null, 4);
-    fs.writeFileSync("data.json", data);
-    res.redirect("/");
-  });
 });
 
-app.get("/public/files/:root", (req, res) => {
-  let root = req.originalUrl.split("/")[3];
-  console.log(root);
-  res.sendFile(__dirname + `/public/files/${root}`);
+app.get("/create/user", (req, res) => {
+    res.render("addUser");
 });
 
-const PORT = 3000;
+app.get("/create/company", (req, res) => {
+    res.render("addCompany");
+});
+
+app.get("/data/import", (req, res) => {
+    res.send('import')
+})
+app.get("/data/export", async (req, res) => {
+    let data = await query('select * from shaxs')
+    let data_c = await query('select * from companies')
+    await export2xls(data, data_c)
+    res.redirect('/')
+});
+
+
 app.listen(PORT, () => console.log(`Port: ${PORT}`));

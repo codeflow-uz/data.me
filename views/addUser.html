@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Database App</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://kit.fontawesome.com/ca1e82e502.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="mainer.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-sm navbar-light bg-light makeWhite">
+      <a class="navbar-brand" href="/">
+        <img src="logo.svg" alt="" />
+      </a>
+      <button
+        class="navbar-toggler d-lg-none"
+        type="button"
+        data-toggle="collapse"
+        data-target="#collapsibleNavId"
+        aria-controls="collapsibleNavId"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="collapsibleNavId">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" href="/"
+              ><i class="fas fa-home"></i> Bosh sahifa</a
+            >
+          </li>
+          <li class="nav-item dropdown active">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              id="dropdownId"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+              ><i class="fas fa-address-book"></i> Add new</a
+            >
+            <div class="dropdown-menu" aria-labelledby="dropdownId">
+              <a class="dropdown-item" href="/create/user"
+                ><i class="fas fa-user-plus"></i> New user</a
+              >
+              <a class="dropdown-item" href="/create/company"
+                ><i class="fas fa-building"></i> New company</a
+              >
+            </div>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              id="dropdownId2"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+              ><i class="fas fa-file-medical-alt"></i> Actions</a
+            >
+            <div class="dropdown-menu" aria-labelledby="dropdownId2">
+              <a class="dropdown-item" href="/data/import"
+                ><i class="fas fa-file-import"></i> Import</a
+              >
+              <a class="dropdown-item" href="/data/export"
+                ><i class="fas fa-cloud-download-alt"></i> Export</a
+              >
+            </div>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="container" style="margin-top: 7%">
+      <form action="/add/user" enctype="multipart/form-data" method="post" class="makeWhite" style="padding: 50px; border-radius: 15px;">
+        <form>
+          <h2 style="text-align: center;">Shaxsni ro'yxatdan o'tkazish</h2>
+          <div class="form-group">
+            <label for="name">To'liq ism: </label>
+            <input type="email" required name="name" class="form-control" id="name" aria-describedby="nameHelp" placeholder="FISh">
+            <small id="nameHelp" class="form-text text-muted">Familiya ismingiz va sharifingizni kiritng</small>
+          </div>
+          <div class="form-group">
+            <label for="date">Tug'ilgan sana: </label>
+            <input type="date" required name="date" class="form-control" id="date" placeholder="Tug'ilgan sanangiz">
+          </div>
+          <div class="form-group">
+            <label for="passport">Passport seriyasi</label>
+            <input type="text" require('module'); name="num_passport" class="form-control passport-num" id="passport"  placeholder="XX-XXXXXXX">
+          </div>
+          <div class="form-group">
+            <label for="nationality">Fuqaroligi</label>
+            <input type="text" required name="country" class="form-control passport-num" id="nationality"  placeholder="Fuqaroligi">
+          </div>
+          <div class="form-group">
+            <label for="files">Briktirilgan fayllar</label>
+            <input type="file" required name="files" class="form-control-file passport-num" id="files" multiple placeholder="Fayllarni yuklang">
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">Ro'yxatga olish</button>
+        </form>
+      </form>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/cleave.js@1.6.0/dist/cleave.min.js"></script>
+    <script>
+      var cleave = new Cleave('.passport-num', {
+        blocks: [2,7],
+        delimiter: '-',
+        uppercase: true
+    });
+    </script>
+  </body>
+</html>
