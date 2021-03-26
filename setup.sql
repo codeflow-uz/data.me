@@ -4,7 +4,9 @@ CREATE DATABASE datame;
 
 CREATE TABLE shaxs (
     id bigserial not null, 
-    fullname varchar(128) not null,
+    f_name varchar(64) not null,
+    l_name varchar(64) not null,
+    m_name varchar(64) not null,
     birthday varchar(24) not null,
     passport varchar(24) not null,
     nationality varchar(36) not null,
@@ -24,6 +26,7 @@ CREATE TABLE user_file (
     id bigserial not null,
     filename varchar(128) not null,
     filesrc varchar(128) not null,
+    u_id varchar(64) not null,
     primary key(id)
 );
 
@@ -31,5 +34,6 @@ CREATE TABLE company_file (
     id bigserial not null,
     filename varchar(128) not null,
     filesrc varchar(128) not null,
+    u_id varchar(64) not null,
     primary key(id)
 );
