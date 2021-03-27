@@ -7,6 +7,7 @@ CREATE TABLE shaxs (
     f_name varchar(64) not null,
     l_name varchar(64) not null,
     m_name varchar(64) not null,
+    fullname varchar(128) not null,
     birthday varchar(24) not null,
     passport varchar(24) not null,
     nationality varchar(36) not null,

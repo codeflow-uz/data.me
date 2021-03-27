@@ -30,32 +30,103 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 
-app.get("/", (req, res) => {
-    res.render('index')
+app.get("/", async (req, res) => {
+    let user = await query('select * from shaxs')
+    let company = await query('select * from companies')
+    let arr = []
+    company.forEach(e => arr.push(e.name))
+    user.forEach(e => arr.push(e.fullname))
+ 
+    res.render('index', {
+        dataObj: arr
+    })
 });
 
 app.post('/search', async (req, res) => {
     if (req.body.from == 'shaxs') {
+        let company = await query('select * from shaxs')
         let user = req.body.searchInput.toLowerCase()
-        let find_user = query('select * from shaxs where fullname = $1', user)
+        let l_name = await query('select * from shaxs where f_name = $1', user)
+        let f_name = await query('select * from shaxs where l_name = $1', user)
+        let m_name = await query('select * from shaxs where m_name = $1', user)
+        let files = await query('select * from user_file')
+        let arr = []
+        company.forEach(e => arr.push(e.fullname))
+
+        // let finded = users.find(e => e.f_name.toLowerCase() == user || e.l_name.toLowerCase() == user || e.m_name.toLowerCase() == user)
+        l_name.forEach(element => {
+            element.files = []
+            for (let i of files) {
+                if ( i.u_id == element.id ) {
+                    element.files.push(i)
+                }
+            }
+        });
+        f_name.forEach(element => {
+            element.files = []
+            for (let i of files) {
+                if ( i.u_id == element.id ) {
+                    element.files.push(i)
+                }
+            }
+        });
+        m_name.forEach(element => {
+            element.files = []
+            for (let i of files) {
+                if ( i.u_id == element.id ) {
+                    element.files.push(i)
+                }
+            }   
+        });
+        
+        for (let i of f_name) {
+            l_name.includes(i) ? l_name.push(i) : false
+        }
+        for (let i of m_name) {
+            l_name.includes(i) ? l_name.push(i) : false
+        }
         res.render('user', {
-            users: find_user
+            users: l_name,
+            dataObj: arr
         })
     } else if (req.body.from == 'company') {
-        res.render('company')
+        let user = req.body.searchInput
+        let company = await query('select * from companies')
+        let companies = await query('select * from companies where name = $1', user)
+        let files = await query('select * from company_file')
+        let arr = []
+
+        company.forEach(e => arr.push(e.name))
+
+        companies.forEach(element => {
+            element.files = []
+            for (let i of files) {
+                if ( i.u_id == element.id ) {
+                    element.files.push(i)
+                }
+            }   
+        });
+
+        res.render('company', {
+            companies: companies,
+            dataObj: arr
+        })
     } else {
-        res.send('Error retry.')
+        res.send('Error retry. Please select all inputs.')
     }
 });
 
 app.get("/create/user", async (req, res) => {
+    let companies = await query('select * from shaxs')
+
+
     res.render("addUser");
 });
 
 app.post('/create/user', (req, res) => {
     upload(req, res, async function (err) {
         if (err) {
-            return res.end("Error uploading file." + err);
+            return res.end("Error uploading file. " + err);
         }
         let {
             passport,
@@ -65,11 +136,12 @@ app.post('/create/user', (req, res) => {
         } = req.body
         let f_name = fullname.split(' ')[0]
         let l_name = fullname.split(' ')[1]
-        let m_name = fullname.split(' ').legth == 3 ? fullname.split(' ')[2] : fullname.split(' ')[2] + ' ' + fullname.split(' ')[3]
-        let user = await query('insert into shaxs (f_name, l_name, m_name, birthday, passport, nationality) values ( $1, $2, $3, $4, $5, $6) RETURNING id ',
-            f_name,
-            l_name,
-            m_name,
+        let m_name = fullname.split(' ').length == 3 ? fullname.split(' ')[2] : fullname.split(' ')[2] + ' ' + fullname.split(' ')[3]
+        let user = await query('insert into shaxs (f_name, l_name, m_name, fullname, birthday, passport, nationality) values ( $1, $2, $3, $4, $5, $6, $7) RETURNING id ',
+            f_name.toLowerCase(),
+            l_name.toLowerCase(),
+            m_name.toLowerCase(),
+            fullname,
             birthday,
             passport,
             nationality
@@ -82,9 +154,45 @@ app.post('/create/user', (req, res) => {
     });
 })
 
-app.get("/create/company", (req, res) => {
-    res.render("addCompany");
+app.get("/create/company", async (req, res) => {
+    let companies = await query('select * from companies')
+    let files = await query('select * from company_file')
+
+    companies.forEach(element => {
+        element.files = files.find(e => e.u_id == element.id)
+    });
+
+    console.log(companies);
+
+    res.render('addCompany', {
+        data: 'data'
+    })
 });
+
+app.post('/create/company', (req, res) => {
+    upload(req, res, async function (err) {
+        if (err) {
+            return res.end("Error uploading file. " + err);
+        }
+        let {
+            name,
+            about,
+            country,
+            date
+        } = req.body
+        let user = await query('insert into companies (name, about, date, county) values ( $1, $2, $3, $4) RETURNING id ',
+            name,
+            about,
+            date,
+            country
+        )
+        // console.log(user);
+        for (let i of req.files) {
+            await query('insert into company_file ( filename, filesrc, u_id ) values ($1, $2, $3)', i.originalname, i.path.split('/')[1] + '/' + i.path.split('/')[2], user[0].id)
+        }
+        res.render('addCompany')
+    });
+})
 
 app.get("/data/import", (req, res) => {
     res.send('import')

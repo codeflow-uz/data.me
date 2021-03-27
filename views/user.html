@@ -17,7 +17,7 @@
 <body>
   <nav class="navbar navbar-expand-sm navbar-light bg-light makeWhite">
     <a class="navbar-brand" href="/">
-      <img src="logo.svg" alt="" />
+      <img src="logo.png" alt="" />
     </a>
     <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId"
       aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation">
@@ -50,9 +50,9 @@
   </nav>
 
   <div class="container" style="text-align: center; margin-top: 15px">
-    <form action="" method="post" style="">
-      <img src="logo.svg" alt="" class="p-5" width="300" /> <br />
-      <input type="search" name="searchInput" id="" class="myInput makeWhite" placeholder="Qidiruv..." />
+    <form action="" autocomplete="off" method="post" style="">
+      <img src="logo.png" alt="" class="p-5" width="300px" /> <br />
+      <input type="search" list="browsers" name="searchInput" id="" class="myInput makeWhite" placeholder="Qidiruv..." />
       <select class="myInput makeWhite" id="searchType" name="from" required>
         <option value="none" disabled selected>Tanlang</option>
         <option value="shaxs">Shaxs</option>
@@ -63,6 +63,15 @@
         Search
       </button>
     </form>
+    <datalist id="browsers">
+      <%
+            for ( let singleItem of dataObj ) {
+        %>
+      <option value='<%= singleItem %>'>
+        <%
+            }
+        %>
+    </datalist>
   </div>
   <br />
   <div class="container">
@@ -80,22 +89,26 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th>1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-            <td>@mdo</td>
-            <td>@mdo</td>
-            <td>
-              <button onclick="location.href = '/edit/shaxs/id=1'" class="actionBtn">
-                <i class="fas fa-edit"></i>
-              </button>
-              <button id="delete" class="actionBtn">
-                <i class="fas fa-trash-alt"></i>
-              </button>
-            </td>
-          </tr>
+          <% var count = 1 %>
+          <% for ( let i of users ) { %>
+            <tr>
+              <th><%= count %></th>
+              <td><%= i.fullname %></td>
+              <td><%= i.birthday %></td>
+              <td><%= i.passport %></td>
+              <td><%= i.nationality %></td>
+              <td><% for (let x of i.files) { %><a target="__blank" href="<%= x.filesrc %>"><%= x.filename %></a> <% }%></td>
+              <td>
+                <button onclick="location.href = '/edit/shaxs/id=<%= i.id %>'" class="actionBtn">
+                  <i class="fas fa-edit"></i>
+                </button>
+                <button onclick="location.href = '/delete/shaxs/id=<%= i.id %>'" id="delete" class="actionBtn">
+                  <i class="fas fa-trash-alt"></i>
+                </button>
+              </td>
+            </tr>
+          <% count++ %>
+          <% } %>
         </tbody>
       </table>
     </div>
