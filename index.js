@@ -31,15 +31,16 @@ app.use(bodyParser.urlencoded({
 }));
 
 app.get("/", async (req, res) => {
-    let user = await query('select * from shaxs')
-    let company = await query('select * from companies')
-    let arr = []
-    company.forEach(e => arr.push(e.name))
-    user.forEach(e => arr.push(e.fullname))
+    // let user = await query('select * from shaxs')
+    // let company = await query('select * from companies')
+    // let arr = []
+    // company.forEach(e => arr.push(e.name))
+    // user.forEach(e => arr.push(e.fullname))
 
-    res.render('index', {
-        dataObj: arr
-    })
+    // res.render('index', {
+    //     dataObj: arr
+    // })
+    res.render('login')
 });
 
 app.post('/search', async (req, res) => {
