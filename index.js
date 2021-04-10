@@ -102,7 +102,7 @@ app.get("/create/user", async (req, res) => {
     let companies = await query('select * from shaxs')
     res.render("addUser");
 });
-
+//just update
 app.post('/create/user', (req, res) => {
     upload(req, res, async function (err) {
         if (err) {
