@@ -1,36 +1,24 @@
 <%- include("_header.html") %>
 
-    <div class="container" style="text-align: center; margin-top: 7%">
-      <form autocomplete="off" action="/search" method="post" style="">
-        <img src="logo.svg" alt="" class="p-5" width="300" /> <br />
-        <input
-          type="search"
-          name="searchInput"
-          list="browsers"
-          id=""
-          required
-          class="myInput makeWhite"
-          placeholder="Qidiruv..."
-        />
-        <select class="myInput makeWhite" id="searchType" name="from" required>
-          <option value="all" disabled selected>Tanlang</option>
-          <option value="shaxs">Shaxs</option>
-          <option value="company">Kompaniya</option>
-        </select>
-        <button type="submit" class="myInput makeWhite">
-          <i class="fas fa-search mainColor"></i>
-          Search
-        </button>
-      </form>
-      <datalist id="browsers">
-        <%
-              for ( let singleItem of dataObj ) {
-          %>
-        <option value='<%= singleItem %>'>
-          <%
-              }
-          %>
-      </datalist>
+    <div class="container" style=" width: 100%; text-align: center; margin-top: 10%">
+      
+      <div class="card-deck">
+        <div class="card bg-primary" style="height: 250px; text-align: center; font-size: 30px; padding-top: 80px; ">
+          <div class="card-body text-center">
+            <p class="card-text">👨‍💼 Shaxslar</p>
+          </div>
+        </div>
+        <div class="card bg-warning" style="height: 250px; text-align: center; font-size: 30px; padding-top: 80px; ">
+          <div class="card-body text-center">
+            <p class="card-text">🏢 Kompaniyalar</p>
+          </div>
+        </div>
+        <div class="card bg-success" style="height: 250px; text-align: center; font-size: 30px; padding-top: 80px; ">
+          <div class="card-body text-center">
+            <p class="card-text">👨‍💻 Adminlar</p>
+          </div>
+        </div>
+      </div>
     </div>
     <%- include("_footer.html")%>
 
