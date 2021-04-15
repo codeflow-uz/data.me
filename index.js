@@ -2,43 +2,34 @@ const express = require("express");
 const app = express();
 const ejs = require("ejs");
 const path = require("path");
-const bodyParser = require("body-parser");
 const multer = require("multer");
 const export2xls = require("./export.js");
 const PORT = 2900;
 const { query } = require("./public/pool.js");
 const storage = multer.diskStorage({
   destination: "./public/files",
-  filename: function (req, file, cb) {
+  filename: function(req, file, cb) {
     cb(null, Date.now() + file.originalname.toString());
   },
 });
 const upload = multer({
   storage: storage,
 }).any("files");
+const home = require('./routes/home')
+const login = require('./routes/login')
 
 app.set("view engine", "html");
 app.engine("html", ejs.renderFile);
 app.use(express.static("public"));
 app.use(express.json());
 app.use(
-  bodyParser.urlencoded({
+  express.urlencoded({
     extended: true,
   })
 );
 
-app.get("/", async (req, res) => {
-  // let user = await query('select * from shaxs')
-  // let company = await query('select * from companies')
-  // let arr = []
-  // company.forEach(e => arr.push(e.name))
-  // user.forEach(e => arr.push(e.fullname))
-
-  // res.render('index', {
-  //     dataObj: arr
-  // })
-  res.render("login");
-});
+app.use('/', login)
+app.use('/home', home)
 
 app.post("/search", async (req, res) => {
   if (req.body.from == "shaxs") {

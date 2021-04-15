@@ -38,3 +38,14 @@ CREATE TABLE company_file (
     u_id varchar(64) not null,
     primary key(id)
 );
+
+CREATE TABLE admins (
+    id bigserial not null,
+    fullname varchar(128) not null,
+    login varchar(128) not null,
+    password varchar(128) not null,
+    level varchar default 'simple',
+    primary key(id)
+);
+
+INSERT INTO admins (fullname, login, password, level) VALUES ('Zokir', 'admin', 'Z12345678r', 'super');
