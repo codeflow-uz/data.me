@@ -16,6 +16,7 @@ const upload = multer({
   storage: storage,
 }).any("files");
 const home = require('./routes/home')
+const shaxs = require('./routes/shaxs')
 const login = require('./routes/login')
 
 app.set("view engine", "html");
@@ -30,6 +31,7 @@ app.use(
 
 app.use('/', login)
 app.use('/home', home)
+app.use('/users', shaxs)
 
 app.post("/search", async (req, res) => {
   if (req.body.from == "shaxs") {
