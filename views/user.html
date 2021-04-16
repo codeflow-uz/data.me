@@ -1,28 +1,12 @@
 <%- include("_header.html") %>
 
-  <div class="container" style="text-align: center; margin-top: 15px">
-    <form action="" autocomplete="off" method="post" style="">
-      <img src="logo.png" alt="" class="p-5" width="300px" /> <br />
-      <input type="search" list="browsers" name="searchInput" id="" class="myInput makeWhite" placeholder="Qidiruv..." />
-      <select class="myInput makeWhite" id="searchType" name="from" required>
-        <option value="none" disabled selected>Tanlang</option>
-        <option value="shaxs">Shaxs</option>
-        <option value="company">Kompaniya</option>
-      </select>
-      <button type="submit" class="myInput makeWhite">
-        Search
-      </button>
-    </form>
-  </div>
-  <br />
-  <div class="container">
+  <div class="container" style="margin: 30px auto;">
     <div class="makeWhite" style="padding: 15px; border-radius: 15px">
-      <table class="table table-borderless" style="border-radius: 15px !important">
+      <table table id="example" class="table table-striped">
         <thead class="bg-primary text-white">
           <tr>
-            <th scope="col">№</th>
             <th scope="col">F.I.Sh</th>
-            <th scope="col">Tug'ilgan sanasi</th>
+            <th scope="col">Tug'ilgan sanasi  </th>
             <th scope="col">Passport</th>
             <th scope="col">Fuqaroligi</th>
             <th scope="col">Fayllar</th>
@@ -33,7 +17,42 @@
           <% var count = 1 %>
           <% for ( let i of users ) { %>
             <tr>
-              <th><%= count %></th>
+              <td><%= i.fullname %></td>
+              <td><%= i.birthday %></td>
+              <td><%= i.passport %></td>
+              <td><%= i.nationality %></td>
+              <td><% for (let x of i.files) { %><a target="__blank" href="<%= x.filesrc %>"><%= x.filename %></a> <% }%></td>
+              <td >
+                <a style="text-decoration: none;" href="/edit/shaxs/id=<%= i.id %>">
+                  📝 
+                </a>
+                <a style="text-decoration: none;" href="/delete/shaxs/id=<%= i.id %>">
+                  🗑
+                </a>
+              </td>
+            </tr>
+          <% count++ %>
+          <% } %>
+          <% for ( let i of users ) { %>
+            <tr>
+              <td><%= i.fullname %></td>
+              <td><%= i.birthday %></td>
+              <td><%= i.passport %></td>
+              <td><%= i.nationality %></td>
+              <td><% for (let x of i.files) { %><a target="__blank" href="<%= x.filesrc %>"><%= x.filename %></a> <% }%></td>
+              <td >
+                <a style="text-decoration: none;" href="/edit/shaxs/id=<%= i.id %>">
+                  📝 
+                </a>
+                <a style="text-decoration: none;" href="/delete/shaxs/id=<%= i.id %>">
+                  🗑
+                </a>
+              </td>
+            </tr>
+          <% count++ %>
+          <% } %>
+          <% for ( let i of users ) { %>
+            <tr>
               <td><%= i.fullname %></td>
               <td><%= i.birthday %></td>
               <td><%= i.passport %></td>
@@ -54,4 +73,15 @@
       </table>
     </div>
   </div>
+
+  <script src="jquery-3.5.1.js"></script>
+  <script src="dataTable.js"></script>
+  <script src="dataTables.bootstrap5.min.js"></script>
+  <script>
+    $(document).ready(function() {
+        $('#example').DataTable();
+    } );
+    console.log($('#example').DataTable());
+  </script>
   <%- include("_footer.html")%>
+  
