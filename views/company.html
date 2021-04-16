@@ -13,24 +13,13 @@
         Search
       </button>
     </form>
-
-    <datalist id="browsers">
-      <%
-            for ( let singleItem of dataObj ) {
-        %>
-      <option value='<%= singleItem %>'>
-        <%
-            }
-        %>
-    </datalist>
   </div>
   <br />
   <div class="container">
     <div class="makeWhite" style="padding: 15px; border-radius: 15px">
-      <table class="table table-borderless" style="border-radius: 15px !important">
-        <thead class="bg-primary text-white">
+      <table table id="example" class="table" style="margin-top: 20px;">
+        <thead class="thead-dark">
           <tr>
-            <th scope="col">№</th>
             <th scope="col">Kompaniya nomi</th>
             <th scope="col">Sana</th>
             <th scope="col">Haqida</th>
@@ -43,19 +32,18 @@
           <% var count = 1 %>
           <% for (let i of companies ) { %>
           <tr>
-            <th scope="row"><%= count %></th>
             <td><%= i.name %></td>
             <td><%= i.data %></td>
             <td><%= i.about %></td>
             <td><%= i.county %></td>
             <td><% for (let x of i.files) { %><a target="__blank" href="<%= x.filesrc %>"><%= x.filename %></a> <% }%></td>
-            <td>
-              <button onclick="location.href = '/edit/shaxs/id=<%= i.id %>'" class="actionBtn">
-                <i class="fas fa-edit"></i>
-              </button>
-              <button onclick="location.href = '/delete/shaxs/id=<%= i.id %>'" id="delete" class="actionBtn">
-                <i class="fas fa-trash-alt"></i>
-              </button>
+            <td >
+              <a style="text-decoration: none;" href="/edit/company/id=<%= i.id %>">
+                📝 
+              </a>
+              <a style="text-decoration: none;" href="/delete/company/id=<%= i.id %>">
+                🗑
+              </a>
             </td>
           </tr>
           <% count++ %>
@@ -64,5 +52,14 @@
       </table>
     </div>
   </div>
+  <script src="jquery-3.5.1.js"></script>
+  <script src="dataTable.js"></script>
+  <script src="dataTables.bootstrap5.min.js"></script>
+  <script>
+    $(document).ready(function() {
+        $('#example').DataTable();
+    } );
+    console.log($('#example').DataTable());
+  </script>
 <%- include("_footer.html")%>
   

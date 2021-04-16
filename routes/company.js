@@ -5,8 +5,8 @@ const {
 const router = express.Router();
 
 router.get('/', async (req, res) => {
-    let users = await query('select * from shaxs')
-    let files = await query('select * from user_file')
+    let users = await query('select * from companies')
+    let files = await query('select * from company_file')
     users.forEach((element) => {
         element.files = [];
         for (let i of files) {
@@ -15,8 +15,8 @@ router.get('/', async (req, res) => {
           }
         }
       });
-    res.render('user', {
-        users: users
+    res.render('company', {
+      companies: users
     })
 })
 

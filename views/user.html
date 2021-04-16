@@ -2,8 +2,8 @@
 
   <div class="container" style="margin: 30px auto;">
     <div class="makeWhite" style="padding: 15px; border-radius: 15px">
-      <table table id="example" class="table table-striped">
-        <thead class="bg-primary text-white">
+      <table table id="example" class="table" style="margin-top: 20px;">
+        <thead class="thead-dark">
           <tr>
             <th scope="col">F.I.Sh</th>
             <th scope="col">Tug'ilgan sanasi  </th>
@@ -14,7 +14,6 @@
           </tr>
         </thead>
         <tbody>
-          <% var count = 1 %>
           <% for ( let i of users ) { %>
             <tr>
               <td><%= i.fullname %></td>
@@ -31,44 +30,8 @@
                 </a>
               </td>
             </tr>
-          <% count++ %>
           <% } %>
-          <% for ( let i of users ) { %>
-            <tr>
-              <td><%= i.fullname %></td>
-              <td><%= i.birthday %></td>
-              <td><%= i.passport %></td>
-              <td><%= i.nationality %></td>
-              <td><% for (let x of i.files) { %><a target="__blank" href="<%= x.filesrc %>"><%= x.filename %></a> <% }%></td>
-              <td >
-                <a style="text-decoration: none;" href="/edit/shaxs/id=<%= i.id %>">
-                  📝 
-                </a>
-                <a style="text-decoration: none;" href="/delete/shaxs/id=<%= i.id %>">
-                  🗑
-                </a>
-              </td>
-            </tr>
-          <% count++ %>
-          <% } %>
-          <% for ( let i of users ) { %>
-            <tr>
-              <td><%= i.fullname %></td>
-              <td><%= i.birthday %></td>
-              <td><%= i.passport %></td>
-              <td><%= i.nationality %></td>
-              <td><% for (let x of i.files) { %><a target="__blank" href="<%= x.filesrc %>"><%= x.filename %></a> <% }%></td>
-              <td >
-                <a style="text-decoration: none;" href="/edit/shaxs/id=<%= i.id %>">
-                  📝 
-                </a>
-                <a style="text-decoration: none;" href="/delete/shaxs/id=<%= i.id %>">
-                  🗑
-                </a>
-              </td>
-            </tr>
-          <% count++ %>
-          <% } %>
+        
         </tbody>
       </table>
     </div>
