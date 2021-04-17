@@ -20,6 +20,7 @@ const shaxs = require('./routes/shaxs')
 const login = require('./routes/login')
 const company = require('./routes/company')
 const admins = require('./routes/admins')
+const newAdmin = require('./routes/newAdmin')
 
 app.set("view engine", "html");
 app.engine("html", ejs.renderFile);
@@ -36,6 +37,7 @@ app.use('/home', home)
 app.use('/users', shaxs)
 app.use('/company', company)
 app.use('/admins', admins)
+app.use('/create/admin', newAdmin)
 
 app.post("/search", async (req, res) => {
   if (req.body.from == "shaxs") {
