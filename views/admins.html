@@ -1,20 +1,4 @@
 <%- include("_header.html") %>
-  <div class="container" style="text-align: center; margin-top: 15px">
-    <form autocomplete="off" action="/search" method="post" style="">
-      <img src="logo.png" alt="" class="p-5" width="300" /> <br />
-      <input type="search" list="browsers" name="searchInput" id="" class="myInput makeWhite" placeholder="Qidiruv..." />
-      <select class="myInput makeWhite" id="searchType" name="from" required>
-        <option value="none" disabled selected>Tanlang</option>
-        <option value="shaxs">Shaxs</option>
-        <option value="company">Kompaniya</option>
-      </select>
-      <button type="submit" class="myInput makeWhite">
-        <i class="fas fa-search mainColor"></i>
-        Search
-      </button>
-    </form>
-  </div>
-  <br />
   <div class="container">
     <div class="makeWhite" style="padding: 15px; border-radius: 15px">
       <table table id="example" class="table" style="margin-top: 20px;">
@@ -35,10 +19,10 @@
             <td><%= i.password %></td>
             <td><%= i.level %></td>
             <td >
-              <a style="text-decoration: none;" href="/edit/company/id=<%= i.id %>">
+              <a style="text-decoration: none;" href="/edit/admin/id=<%= i.id %>">
                 📝 
               </a>
-              <a style="text-decoration: none;" href="/delete/company/id=<%= i.id %>">
+              <a style="text-decoration: none;" href="/delete/admin/id=<%= i.id %>">
                 🗑
               </a>
             </td>
