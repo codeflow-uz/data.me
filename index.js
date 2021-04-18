@@ -14,6 +14,7 @@ const newAdmin = require('./routes/newAdmin')
 const newUser = require('./routes/newUser')
 const newCompany = require('./routes/newCompany')
 const editAdmin = require('./routes/editAdmins')
+const editCompany = require('./routes/editCompany')
 
 app.set("view engine", "html");
 app.engine("html", ejs.renderFile);
@@ -34,6 +35,7 @@ app.use('/create/admin', newAdmin)
 app.use('/create/user', newUser)
 app.use('/create/company', newCompany)
 app.use('/edit/admin/id=:root', editAdmin)
+app.use('/edit/company/id=:root', editCompany)
 
 
 app.get("/create/company", async (req, res) => {

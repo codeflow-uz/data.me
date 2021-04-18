@@ -1,28 +1,24 @@
 <%- include("_header.html") %>
     <div class="container" style="margin-top: 7%">
-      <form action="/create/company" method="post" enctype="multipart/form-data" class="makeWhite" style="padding: 50px; border-radius: 15px;">
+      <form method="post" class="makeWhite" style="padding: 50px; border-radius: 15px;">
         <form>
           <h2 style="text-align: center;">Kompaniyani ro'yxatdan o'tkazish</h2>
           <div class="form-group">
             <label for="name">Kompaniya nomi: </label>
-            <input type="text" required name="name" class="form-control" id="name" aria-describedby="nameHelp" placeholder="Nomi">
+            <input type="text" value="<%= data.name %>" required name="name" class="form-control" id="name" aria-describedby="nameHelp" placeholder="Nomi">
             <small id="nameHelp" class="form-text text-muted">Kompaniya nomini kiritng</small>
           </div>
           <div class="form-group">
             <label for="date">Qayd etilgan sana: </label>
-            <input type="date" required name="date" class="form-control" id="date" placeholder="Sana">
+            <input type="date" value="<%= data.date %>" required name="date" class="form-control" id="date" placeholder="Sana">
           </div>
           <div class="form-group">
             <label for="passport">Kompaniya to'grisida:</label>
-            <input type="text" required name="about" class="form-control"  placeholder="">
+            <input type="text" value="<%= data.about %>" required name="about" class="form-control"  placeholder="">
           </div>
           <div class="form-group">
             <label for="nationality">Tashkil etilgan davlat:</label>
-            <input type="text" required name="country" class="form-control" id="nationality"  placeholder="">
-          </div>
-          <div class="form-group">
-            <label for="files">Briktirilgan fayllar:</label>
-            <input type="file" required  name="files" class="form-control-file passport-num" id="files" multiple placeholder="Fayllarni yuklang">
+            <input type="text" value="<%= data.county %>" required name="country" class="form-control" id="nationality"  placeholder="">
           </div>
           <button type="submit" class="btn btn-primary btn-block">Ro'yxatga olish</button>
         </form>
